@@ -1,8 +1,8 @@
 # Environment Labeler
 
-Environment Labeler helps you see which environment you are currently using.
+Environment Labeler is a Chrome extension that helps you see which environment you are currently using.
 
-If your production, staging, test, or customer systems look similar, this extension can show a clear label such as `STAGING`, `PROD`, or `QA` directly on the page.
+If your production, staging, test, or customer systems look similar, the extension can show a clear label such as `STAGING`, `PROD`, or `QA` directly on the page.
 
 ![Environment Labeler screenshot](screenshot.png)
 

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Environment Labeler",
-  "description": "Show a configurable environment label on matching URLs.",
+  "description": "A Chrome extension that shows configurable environment labels on matching URLs.",
   "version": "0.1.0",
   "permissions": ["activeTab", "storage"],
   "icons": {
