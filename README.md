@@ -21,7 +21,7 @@ If your production, staging, test, or customer systems look similar, the extensi
 3. Click **Load unpacked**.
 4. Select this extension folder.
 
-## Build A Zip File
+## Build The Extension
 
 Run this command from the extension folder:
 
@@ -29,7 +29,7 @@ Run this command from the extension folder:
 ./build.sh
 ```
 
-The zip file will be created in the `dist` folder.
+The extension package will be created in the `dist` folder.
 
 ## Add A Rule
 
