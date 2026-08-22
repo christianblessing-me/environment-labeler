@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Environment Labeler</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <h1>Environment Labeler</h1>
+        <div class="topbar-actions">
+          <button id="importRules" type="button" class="secondary compact">Import</button>
+          <button id="exportRules" type="button" class="secondary compact">Export</button>
+          <button id="addRule" type="button" class="primary compact">Add rule</button>
+          <input id="importFile" type="file" accept="application/json,.json" hidden>
+        </div>
+      </header>
+
+      <section class="current-page" aria-live="polite" title="Current tab">
+        <span class="muted">Current</span>
+        <span id="currentUrl" class="current-url">Loading...</span>
+      </section>
+
+      <section class="workspace">
+        <form id="ruleForm" class="rule-form">
+          <input type="hidden" id="ruleId">
+
+          <div class="url-row">
+            <label>
+              <span>URL match</span>
+              <input id="urlPattern" type="text" placeholder="https://staging.example.com or *://*.example.dev/*" required>
+            </label>
+
+            <label>
+              <span>Match type</span>
+              <select id="matchType" required>
+                <option value="contains">Contains</option>
+                <option value="wildcard">Wildcard</option>
+                <option value="regex">Regex</option>
+                <option value="exact">Exact URL</option>
+                <option value="domain">Domain</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="inline-actions">
+            <button id="useCurrentUrl" type="button" class="secondary compact">Use current URL</button>
+            <button id="useCurrentDomain" type="button" class="secondary compact">Use current domain</button>
+          </div>
+
+          <div class="row">
+            <label>
+              <span>Label</span>
+              <input id="labelText" type="text" placeholder="STAGING" maxlength="32" required>
+            </label>
+
+            <label class="color-field">
+              <span>Color</span>
+              <input id="labelColor" type="color" value="#ef4444" required>
+            </label>
+          </div>
+
+          <div class="number-row">
+            <label>
+              <span>Font size px</span>
+              <input id="fontSize" type="number" min="10" max="120" step="1" value="60" required>
+            </label>
+
+            <label>
+              <span>Opacity %</span>
+              <input id="opacity" type="number" min="0" max="100" step="1" value="50" required>
+            </label>
+          </div>
+
+          <section class="position-field" aria-labelledby="positionLabel">
+            <span id="positionLabel" class="field-label">Position and offset</span>
+            <input id="position" type="hidden" value="upper-right">
+            <div id="cornerPicker" class="corner-picker is-upper-right" role="radiogroup" aria-labelledby="positionLabel">
+              <button type="button" class="corner-option upper-left" data-position="upper-left" aria-label="Upper left"></button>
+              <button type="button" class="corner-option upper-right" data-position="upper-right" aria-label="Upper right"></button>
+              <button type="button" class="corner-option lower-left" data-position="lower-left" aria-label="Lower left"></button>
+              <button type="button" class="corner-option lower-right" data-position="lower-right" aria-label="Lower right"></button>
+
+              <div id="offsetEditor" class="offset-editor">
+                <label>
+                  <span id="offsetXLabel">Right %</span>
+                  <input id="offsetX" type="number" min="0" max="100" step="1" value="2" required>
+                </label>
+
+                <label>
+                  <span id="offsetYLabel">Top %</span>
+                  <input id="offsetY" type="number" min="0" max="100" step="1" value="2" required>
+                </label>
+              </div>
+            </div>
+          </section>
+
+          <div class="toggle-row">
+            <label class="toggle">
+              <input id="enabled" type="checkbox" checked>
+              <span>Enabled</span>
+            </label>
+          </div>
+
+          <div class="actions">
+            <button id="deleteRule" type="button" class="secondary danger" hidden>Delete</button>
+            <button type="submit" class="primary">Save Rule</button>
+          </div>
+        </form>
+
+        <section class="rules">
+          <h2>Rules</h2>
+          <div id="rulesList" class="rules-list"></div>
+          <p id="emptyState" class="empty-state" hidden>No rules yet.</p>
+        </section>
+      </section>
+    </main>
+
+    <template id="ruleTemplate">
+      <button type="button" class="rule-item">
+        <span class="swatch"></span>
+        <span class="rule-copy">
+          <strong class="rule-label"></strong>
+          <span class="rule-url"></span>
+        </span>
+      </button>
+    </template>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
